@@ -1,0 +1,16 @@
+1 -------------------------------
+Install requirements by cmd
+Instale os Requirements usando CMD
+
+pip install -r requirements.txt
+---------------------------------
+2 - Instale um Banco de dados (MySQL por exemplo).
+Altere as configurações e Importações para o banco de dados que for usar.
+Coloque o Usuario e senha (IP do HOST).
+
+Crie a Base de dados rodando o SQL salvo em magnetroles.sql
+3 -----------------------------------------------------------------------------
+Não se esqueça de alterar o TOKEN do BOT no arquivo:
+magnet_token.txt
+4 -----------------
+Good Luck - Boa sorte.
