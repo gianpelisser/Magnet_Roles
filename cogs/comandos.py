@@ -214,35 +214,3 @@ def setup(bot):
     bot.add_cog(Comandos(bot))
 
 
-"""
-            
-            
-            
-
-            3 - criar o comando para add cargo (onde somente adm pode usar), e salvar automaticamente na banco de dados (no membro que foi adicionado).
-
-            3.1 - Criar o comando para remover o cargo da DB (onde somente adm pode usar). para que o usuário, 
-            não peque o cargo novamente apos os administradores do discord remover este cargo.
-            3.2 - ao em vez de remover, banir o cargo do usuario. E ao add novamente, verificar se já não está ali.
-            e alterar o status para "não banido"
-            3.3 - E deixar claro que se for usar esse bot, todo e qualquer cargo, deverá ser adicionado e removido usando comando do bot.
-            Principalmente para remover.
-            
-            adicionar até poderá ser manualmente, mas para remover deve-se usar o comando do bot para remover o cargo do usuário.
-            E essa remoção vai funcionar por @ao_mencionar_o_discord do usuário ou por discord_id do usuário.
-            usar discord_id do usuário será possivel remover cargos, caso o jogador tenha sido expulso ou que ele(a) 
-            tenha saido por conta propria do servidor discord.
-
-            4 - pronto
-
-            5 - Criar 1 comando de mass role.
-            
-            6.7 - usar as colunas ban_user e ban_role para proibir um usuario de usar o bot e de um cargo ser adicionado para determinado usuario.
-            
-            7 - expulsar, e banir usuarios do discord.
-            7.1 - Em caso de banir, banir o usuario dos cargos do bot para o discord onde o comando foi usado.
-            7.2 - ou não. criar 1 comando diferente de banir do discord, para banir apenas o usuario de usar o imadecargos
-            
-            8 - Colocar o comando ima de carogs no On user join =D
-            
-            """
