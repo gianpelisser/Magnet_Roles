@@ -10,3 +10,5 @@ and other tools to help keep the server running nice and easy.
 
 [7]: https://raw.githubusercontent.com/python-discord/branding/master/logos/badge/badge_github.svg
 [8]: https://discord.gg/python
+
+Python Version: 3.8
