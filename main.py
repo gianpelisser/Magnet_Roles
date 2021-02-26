@@ -63,39 +63,6 @@ bot = AutoShardedBot(command_prefix=get_prefix, case_insensitive=True)
 # bot.remove_command('help')
 
 
-"""
-@bot.listen("on_command_error")
-async def error_handler(ctx, error):
-    # Testar colocar esses error no arquivo error_handler.py
-    error = getattr(error, 'original', error)
-    if isinstance(error, commands.BotMissingPermissions):
-        await ctx.send("O Bot não tem permissão para adicionar ou remover todos os cargos.\n"
-                       "Coloque o cargo do BOT acima de todos os cargos que o BOT pode adicionar e remover.")
-
-    elif isinstance(error, commands.MissingPermissions):
-        await ctx.send("Você não tem direitos para este comando.")
-        # await ctx.message.delete()
-
-    elif isinstance(error, commands.CommandNotFound):
-        await ctx.send("Comando inválido.")
-        await ctx.message.delete()
-
-    elif isinstance(error, discord.Forbidden):
-        await ctx.send(f"Alguém tentou adicionar ou remover um cargo, mas não tenho permissão para fazer isso.\n"
-                       f"Certifique-se de que tenho um cargo de hierarquia mais alta do que o cargo que devo "
-                       f"adicionar ou remover e de que tenho a permissão para `Gerenciar cargos`.")
-    elif isinstance(error, discord.errors.Forbidden):
-        await ctx.send("Não é permitido fazer isso.")
-
-    if isinstance(error, commands.CommandOnCooldown):
-        s = error.retry_after
-        s = round(s, 2)
-        h, r = divmod(int(s), 3600)
-        m, s = divmod(r, 60)
-        return await ctx.send(f'Cooldown você precisa esperar **{str(h) + "h : " if h != 0 else ""}{str(m) + "m : " if m != 0 else ""}{str(s) + "s" if s != 0 else ""}** para usar esse comando novamente.')
-# """
-
-
 @bot.event
 async def on_ready():
     print('-=-' * 24)
@@ -240,7 +207,3 @@ if __name__ == "__main__":
 
     bot.run(token)
 
-"""
-1 - Colocar o comando ima de carogs no On user join =D
-on_member_join
-"""
