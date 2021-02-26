@@ -66,13 +66,7 @@ class CommandErrorHandler(commands.Cog):
             s = round(s, 2)
             h, r = divmod(int(s), 3600)
             m, s = divmod(r, 60)
-            if discord.utils.find(lambda r: r.name == "Member", ctx.author.roles):
-                return await ctx.channel.send(f'<@{ctx.author.id}> **Cooldown** you need to wait **{str(h) + "h : " if h != 0 else ""}{str(m) + "m : " if m != 0 else ""}{str(s) + "s" if s != 0 else ""}** to use that command again.')
-            if discord.utils.find(lambda r: r.name == "Membro" or r.name == "BoB Membro", ctx.author.roles):
-                return await ctx.channel.send(f'<@{ctx.author.id}> **Cooldown** você precisa esperar **{str(h) + "h : " if h != 0 else ""}{str(m) + "m : " if m != 0 else ""}{str(s) + "s" if s != 0 else ""}** para usar esse comando novamente.')
-            if discord.utils.find(lambda r: r.name == "Miembro", ctx.author.roles):
-                return await ctx.channel.send(f'<@{ctx.author.id}> **Cooldown** necesitas esperar **{str(h) + "h : " if h != 0 else ""}{str(m) + "m : " if m != 0 else ""}{str(s) + "s" if s != 0 else ""}** usar ese comando nuevamente.')
-            return await ctx.send(f'Cooldown você precisa esperar **{str(h) + "h : " if h != 0 else ""}{str(m) + "m : " if m != 0 else ""}{str(s) + "s" if s != 0 else ""}** para usar esse comando novamente.')
+            return await ctx.channel.send(f'<@{ctx.author.id}> **Cooldown** você precisa esperar **{str(h) + "h : " if h != 0 else ""}{str(m) + "m : " if m != 0 else ""}{str(s) + "s" if s != 0 else ""}** para usar esse comando novamente.')
 
         else:
             print('Ignoring exception in command {}:'.format(ctx.command), file=sys.stderr)
