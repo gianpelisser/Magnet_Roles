@@ -1,16 +1,30 @@
-1 -------------------------------
+0 - PYTHON VERSION => 3.8
+=================================
+1 - ISTALL PIP AND REQUIREMENTS
+
 Install requirements by cmd
-Instale os Requirements usando CMD
-
 pip install -r requirements.txt
----------------------------------
-2 - Instale um Banco de dados (MySQL por exemplo).
-Altere as configurações e Importações para o banco de dados que for usar.
-Coloque o Usuario e senha (IP do HOST).
 
-Crie a Base de dados rodando o SQL salvo em magnetroles.sql
-3 -----------------------------------------------------------------------------
-Não se esqueça de alterar o TOKEN do BOT no arquivo:
+---------------------------------
+=================================
+---------------------------------
+2 - DATA BASE
+
+Install a Data Base (MySQL for example).
+Change the settings and Imports for the database you are going to use.
+Enter the Username and password (HOST IP).
+
+2.1 - Create the database
+
+Run the SQL saved in magnetroles.sql
+Folder: Data_Base
+---------------------------------
+=================================
+---------------------------------
+3 - TOKEN
+Don't forget to change the BOT TOKEN in the file:
 magnet_token.txt
-4 -----------------
-Good Luck - Boa sorte.
+---------------------------------
+=================================
+---------------------------------
+4 - Good Luck - Boa sorte!

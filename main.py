@@ -10,7 +10,8 @@ from discord.ext.commands import AutoShardedBot
 import asyncio
 import pymysql
 import pymysql.cursors
-
+import locales.pt_br
+import locales.en
 
 # Pegar Token
 
@@ -33,15 +34,15 @@ def get_prefix(bot, message):
     try:
         db = pymysql.connect(
             host='127.0.0.1',
-            user='usuariodb',
-            password='senha-password',
+            user='usuario',
+            password='Senha-password',
             db='magnetroles',
             cursorclass=pymysql.cursors.DictCursor)
         cursor = db.cursor()
 
         server_id = message.guild.id
 
-        cursor.execute(f"SELECT server_prefix FROM d_servers WHERE server_id = '{server_id}'")
+        cursor.execute(f"SELECT server_prefix FROM `d_servers` WHERE server_id = '{server_id}'")
         s_prefix = cursor.fetchone()
         cursor.close()
         db.close()
@@ -88,8 +89,8 @@ async def on_member_join(member):
     try:
         db = pymysql.connect(
             host='127.0.0.1',
-            user='usuariodb',
-            password='senha-password',
+            user='usuario',
+            password='Senha-password',
             db='magnetroles',
             cursorclass=pymysql.cursors.DictCursor)
         cursor = db.cursor()
@@ -111,13 +112,13 @@ async def on_member_join(member):
             try:
                 db = pymysql.connect(
                     host='127.0.0.1',
-                    user='usuariodb',
-                    password='senha-password',
+                    user='usuario',
+                    password='Senha-password',
                     db='magnetroles',
                     cursorclass=pymysql.cursors.DictCursor)
                 cursor = db.cursor()
 
-                cursor.execute(f"SELECT id_server FROM d_servers WHERE server_id = '{guild.id}'")
+                cursor.execute(f"SELECT id_server FROM `d_servers` WHERE server_id = '{guild.id}'")
                 row_id = cursor.fetchone()
                 id_server = row_id['id_server']
 
@@ -156,7 +157,7 @@ async def on_member_join(member):
                         roles_adm_list.append(roles['role_id_adm'])
 
                 cursor.execute(
-                    f"SELECT role_id FROM d_roles WHERE discord_id = '{member.id}' and id_server = '{id_server}'")
+                    f"SELECT role_id FROM `d_roles` WHERE discord_id = '{member.id}' and id_server = '{id_server}'")
                 row_user = cursor.fetchall()
 
                 if row_user is not None:
@@ -185,7 +186,11 @@ async def on_member_join(member):
                                                     print(meg_error_forbidden)
                                                     return await guild.system_channel.send(meg_error_forbidden)
                                                 await guild.system_channel.send(f"<@{member.id}> O cargo `{role.name}` foi adicionado.")
-
+                                        """elif role == ctx.guild.default_role:
+                                        await ctx.send("Cargo: Everyone")"""
+                '''else:
+                    return await guild.system_channel.send(f"<@{member.id}> não foi encontrado nem um cargo salvo "
+                                                           f"para você nesse discord.")'''
             except Exception as error:
                 raise error
     except Exception as e:
@@ -208,8 +213,8 @@ async def on_guild_join(guild):
     try:
         db = pymysql.connect(
             host='127.0.0.1',
-            user='usuariodb',
-            password='senha-password',
+            user='usuario',
+            password='Senha-password',
             db='magnetroles',
             cursorclass=pymysql.cursors.DictCursor)
         cursor = db.cursor()
@@ -217,11 +222,11 @@ async def on_guild_join(guild):
         server_id = guild.id
         server_name = guild.name
 
-        cursor.execute(f"SELECT * FROM d_servers WHERE server_id = '{server_id}'")
+        cursor.execute(f"SELECT * FROM `d_servers` WHERE server_id = '{server_id}'")
         row = cursor.fetchone()
 
         if row is None:
-            sql = "INSERT INTO d_servers (server_id, server_nome, server_prefix, server_ativo) VALUES(%s,%s,%s,%s)"
+            sql = "INSERT INTO `d_servers` (server_id, server_nome, server_prefix, server_ativo) VALUES(%s,%s,%s,%s)"
             val = (server_id, server_name, 'mr', 'yes')
             cursor.execute(sql, val)
 
@@ -229,7 +234,7 @@ async def on_guild_join(guild):
             cursor.close()
             db.close()
         else:
-            cursor.execute(f"UPDATE d_servers SET server_ativo = 'yes', server_nome = '{server_name}' "
+            cursor.execute(f"UPDATE `d_servers` SET server_ativo = 'yes', server_nome = '{server_name}' "
                            f"WHERE server_id = '{server_id}'")
             db.commit()
             cursor.close()
@@ -244,8 +249,8 @@ async def on_guild_remove(guild):
     try:
         db = pymysql.connect(
             host='127.0.0.1',
-            user='usuariodb',
-            password='senha-password',
+            user='usuario',
+            password='Senha-password',
             db='magnetroles',
             cursorclass=pymysql.cursors.DictCursor)
         cursor = db.cursor()
@@ -253,11 +258,11 @@ async def on_guild_remove(guild):
         server_id = guild.id
         server_name = guild.name
 
-        cursor.execute(f"SELECT * FROM d_servers WHERE server_id = '{server_id}'")
+        cursor.execute(f"SELECT * FROM `d_servers` WHERE server_id = '{server_id}'")
         row = cursor.fetchone()
 
         if row is not None:
-            cursor.execute(f"UPDATE d_servers SET server_ativo = 'no', server_nome = '{server_name}' "
+            cursor.execute(f"UPDATE `d_servers` SET server_ativo = 'no', server_nome = '{server_name}' "
                            f"WHERE server_id = '{server_id}'")
             db.commit()
             cursor.close()
@@ -279,6 +284,18 @@ async def on_message(message):
     if message.author.bot:
         return
     await bot.process_commands(message)
+
+
+@bot.event
+async def premium_guild_subscription(ctx):
+    # https://discordpy.readthedocs.io/en/latest/api.html#discord.MessageType.premium_guild_subscription
+    # https://stackoverflow.com/questions/65385757/get-the-number-of-boosts-in-a-server-discord-py
+    server = ctx.guild
+    user_booster = server.premium_subscribers
+    channel = bot.get_channel(608343855359852566)
+    channel.send(f"**{user_booster}** fez um novo Server Boost nesse Discord.\n"
+             f"Totalizando **{server.premium_subscription_count}** no {server.name}\n"
+             f"Obrigado {user_booster.name} pelo seu apoio!")
 
 
 '''
